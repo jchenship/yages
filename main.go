@@ -9,6 +9,7 @@ import (
 
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/reflection"
 )
 
@@ -55,7 +56,8 @@ func (s *Server) Listen() error {
 
 // Ping returns a "pong" (constant message).
 func (s *Server) Ping(ctx context.Context, _ *yages.Empty) (*yages.Content, error) {
-	return &yages.Content{Text: "pong"}, nil
+	md, _ := metadata.FromIncomingContext(ctx)
+	return &yages.Content{Text: md.Get(":authority")[0]}, nil
 }
 
 // Reverse returns the message it received in reverse order.

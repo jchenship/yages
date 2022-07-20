@@ -8,11 +8,11 @@ build :
 clean :
 	@rm srv-yages
 
-container :
-	@docker build --build-arg yversion=$(yages_version) -t quay.io/mhausenblas/yages:$(yages_version) .
+container : build
+	@docker build --build-arg yversion=$(yages_version) --network host -t jchenship/yages:$(yages_version) .
 
-push :
-	@docker push quay.io/mhausenblas/yages:$(yages_version)
+push : container
+	@minikube image load jchenship/yages:$(yages_version)
 
 deploy :
 	@kubectl create ns grpc-demo
