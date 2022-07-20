@@ -4,7 +4,8 @@ metadata:
   name: yages
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
-    nginx.ingress.kubernetes.io/service-upstream: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    # nginx.ingress.kubernetes.io/service-upstream: "true"
 spec:
   ingressClassName: nginx
   tls:
@@ -32,7 +33,7 @@ spec:
     app: yages
   ports:
     - name: grpc
-      appProtocol: grpc
+      # appProtocol: grpc
       protocol: TCP
       port: 80
       targetPort: 9000

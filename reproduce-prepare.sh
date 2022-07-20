@@ -1,7 +1,6 @@
 #!/bin/bash
 
 minikube start
-minikube addons enable ingress
 
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm install ingress-nginx ingress-nginx/ingress-nginx
@@ -13,3 +12,5 @@ sleep 1
 make push
 kubectl create secret tls yages-tls --key ca.key --cert ca.crt
 kubectl apply -f ingress.yaml
+
+minikube tunnel >/dev/null &

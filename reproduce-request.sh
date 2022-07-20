@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ip=""
+ip=$(kubectl get ingress yages --template="{{range .status.loadBalancer.ingress}}{{.ip}}{{end}}")
 while [ -z "$ip" ]; do
     echo "waiting ingress ip to be ready..."
     sleep 5
