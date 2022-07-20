@@ -17,6 +17,7 @@ run `./reproduce-prepare.sh` , this script will
 
 - start minikube
 - install ingress-nginx latest (without any values config)
+- build a grpc server that will echo the `:authority` header and load the image to minikube
 - create a tls secret (because grpc ingress needs to go over tls)
 - apply ingress.yaml
 
